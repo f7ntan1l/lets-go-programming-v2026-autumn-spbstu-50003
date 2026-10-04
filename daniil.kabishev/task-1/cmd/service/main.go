@@ -1,54 +1,41 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
-	"strings"
 )
 
 func main() {
-	scanner := bufio.NewScanner(os.Stdin)
+	var firstNumber, secondNumber int
+	var operator string
 
-	if !scanner.Scan() {
-		return
-	}
-	firstInput := strings.TrimSpace(scanner.Text())
-	a, err := strconv.Atoi(firstInput)
-	if err != nil {
+	if _, err := fmt.Scan(&firstNumber); err != nil {
 		fmt.Println("Invalid first operand")
 		return
 	}
 
-	if !scanner.Scan() {
-		return
-	}
-	secondInput := strings.TrimSpace(scanner.Text())
-	b, err := strconv.Atoi(secondInput)
-	if err != nil {
+	if _, err := fmt.Scan(&secondNumber); err != nil {
 		fmt.Println("Invalid second operand")
 		return
 	}
 
-	if !scanner.Scan() {
+	if _, err := fmt.Scan(&operator); err != nil {
+		fmt.Println("Invalid operation")
 		return
 	}
-	op := strings.TrimSpace(scanner.Text())
 
-	switch op {
+	switch operator {
 	case "+":
-		fmt.Println(a + b)
+		fmt.Println(firstNumber + secondNumber)
 	case "-":
-		fmt.Println(a - b)
+		fmt.Println(firstNumber - secondNumber)
 	case "*":
-		fmt.Println(a * b)
+		fmt.Println(firstNumber * secondNumber)
 	case "/":
-		if b == 0 {
+		if secondNumber == 0 {
 			fmt.Println("Division by zero")
 			return
 		}
-		fmt.Println(a / b)
+		fmt.Println(firstNumber / secondNumber)
 	default:
 		fmt.Println("Invalid operation")
 	}
